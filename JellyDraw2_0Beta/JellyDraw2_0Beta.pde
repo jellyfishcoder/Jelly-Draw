@@ -7,8 +7,9 @@ import controlP5.*;
 //Add private controller
 ControlP5 colorControl;
 
-//PFont Variable
+//Fonts and Images
 PFont font;
+PImage photo;
 
 // Main Variables
 color sc;   //stroke color
@@ -22,8 +23,9 @@ int BLUE;
 int BRUSH;
 int OPACITY;
 int ERASER;
-String FILE_NAME;
 int SAVE;
+
+DropdownList l;
 
 /*..Run setup..*\
 \*function once*/
@@ -69,7 +71,7 @@ void setup() {
   colorControl.controller("OPACITY").setColorLabel(#000000);
 
   //Stroke size slider
-  colorControl.addSlider("BRUSH", 1, 50, 1, 900, 15, 100, 10);
+  colorControl.addSlider("BRUSH", 1, 50, 1, 895, 15, 100, 10);
   colorControl.getController("BRUSH").setValue(1);
   colorControl.controller("BRUSH").setColorLabel(#000000);
   
@@ -78,12 +80,20 @@ void setup() {
   colorControl.controller("ERASER").setColorLabel(#000000);
   
   //Save Text Feild
-  colorControl.addTextfield("FILE_NAME", 350, 30, 100, 10);
+  colorControl.addTextfield("FILE_NAME", 400, 30, 100, 10);
   colorControl.controller("FILE_NAME").setColorLabel(#000000);
   
   //Save Button
-  colorControl.addBang("SAVE", 475, 30, 100, 10);
+  colorControl.addBang("SAVE", 525, 30, 100, 10);
   colorControl.controller("SAVE").setColorLabel(#000000);
+  
+  //Dropdown list
+  l = colorControl.addDropdownList("LOAD FILE", 650, 40, 70, 30);
+  l.addItem("Sea", 1);
+  l.addItem("Earth", 2);
+  l.addItem("Volcano", 3);
+  l.captionLabel().style().marginTop = 0;
+  l.captionLabel().style().marginLeft = 3;
 }
 
 /*.Repeat stuff in.*\
@@ -103,7 +113,7 @@ void draw() {
   //Draw example of selected brush and paint
   stroke(sc);
   strokeWeight(BRUSH);
-  point(1050, 50);
+  point(1050, 30);
 }
 
 // Draw Point \\
@@ -125,17 +135,22 @@ void clearMenu() {
   stroke(0);
   strokeWeight(1);
   fill(255);
-  rect(0, 0, 1100, 42.5);
+  rect(0, 0, 1100, 60);
   strokeWeight(51);
   stroke(255);
-  point(1050, 50);
+  point(1050, 30);
 }
 
 //BANG button \\
 void controlEvent(ControlEvent theEvent) {
   if(theEvent.isController()) {
     if(theEvent.controller().name()=="bang1") {
-      save(FILE_NAME);
+      save(colorControl.controller("FILE_NAME").getValue()+"jpg");
+    }
+    if(theEvent.controller().name()=="LOAD_FILE") {
+      photo = loadImage(l.getValue()+"jpg");
     }
   }
 }
+
+
