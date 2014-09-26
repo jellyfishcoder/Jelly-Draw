@@ -22,6 +22,8 @@ int BLUE;
 int BRUSH;
 int OPACITY;
 int ERASER;
+String FILE_NAME;
+int SAVE;
 
 /*..Run setup..*\
 \*function once*/
@@ -76,6 +78,12 @@ void setup() {
   colorControl.controller("ERASER").setColorLabel(#000000);
   
   //Save Text Feild
+  colorControl.addTextfield("FILE_NAME", 350, 30, 100, 10);
+  colorControl.controller("FILE_NAME").setColorLabel(#000000);
+  
+  //Save Button
+  colorControl.addBang("SAVE", 475, 30, 100, 10);
+  colorControl.controller("SAVE").setColorLabel(#000000);
 }
 
 /*.Repeat stuff in.*\
@@ -112,17 +120,6 @@ void mouseDragged() {
   line(pmouseX, pmouseY, mouseX, mouseY);
 }
 
-// Update Mouse Coords \\
-void mouseMoved() {
-  //coords();
-}
-
-// Change Color or Save \\
-void keyPressed() {
-  if (key == 'S' || key == 's') {
-    save("yourPic.tif");
-  }
-}
 // Clear Menu \\
 void clearMenu() {
   stroke(0);
@@ -132,4 +129,13 @@ void clearMenu() {
   strokeWeight(51);
   stroke(255);
   point(1050, 50);
+}
+
+//BANG button \\
+void controlEvent(ControlEvent theEvent) {
+  if(theEvent.isController()) {
+    if(theEvent.controller().name()=="bang1") {
+      save(FILE_NAME);
+    }
+  }
 }
