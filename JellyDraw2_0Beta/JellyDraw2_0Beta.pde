@@ -2,9 +2,14 @@
 //By Alexander Pope
 //Control P5 Library\\
 
-import controlP5.*;
-ControlP5 colorControl;  //make a controller for color variable
+//For extra windows
+import java.awt.Frame;
+import java.awt.BorderLayout;
 
+import controlP5.*;
+
+ControlP5 colorControl;  //make a controller for color variable
+Accordion accordion;     //make a controller for the accordian menu's
 //PFont Variable\\\
 PFont font;
 
@@ -38,10 +43,11 @@ void setup() {
 
   //Red slider
   colorControl.addSlider("RED", 0, 255, 0, 5, 15, 255, 10);
+  colorControl.getController("RED").setValue(0);
   colorControl.controller("RED").setColorForeground(#FF0000);
   colorControl.controller("RED").setColorActive(#FF0000);
   colorControl.controller("RED").setColorLabel(#FF0000);
-
+  
   //Green slider
   colorControl.addSlider("GREEN", 0, 255, 0, 295, 15, 255, 10);
   colorControl.controller("GREEN").setColorForeground(#00FF00);
@@ -72,9 +78,12 @@ void setup() {
 \*..draw function..*/
 void draw() {
   clearMenu();
+  
   //Set color and brush variables
+  
   sc = color(RED, GREEN, BLUE, OPACITY); 
   sw = BRUSH;
+  
   //Draw example of selected brush and paint
   stroke(sc);
   strokeWeight(BRUSH);
@@ -90,7 +99,6 @@ void mouseClicked() {
 
 // Draw Line \\
 void mouseDragged() {
-  //coords();
   stroke(sc);
   strokeWeight(BRUSH);
   line(pmouseX, pmouseY, mouseX, mouseY);
