@@ -88,10 +88,10 @@ void setup() {
   colorControl.controller("SAVE").setColorLabel(#000000);
   
   //Dropdown list
-  l = colorControl.addDropdownList("LOAD FILE", 650, 40, 70, 30);
+  l = colorControl.addDropdownList("LOAD_FILE", 650, 40, 70, 30);
   l.addItem("Sea", 1);
-  l.addItem("Earth", 2);
-  l.addItem("Volcano", 3);
+  l.addItem("Grass", 2);
+  l.addItem("Galaxy", 3);
   l.captionLabel().style().marginTop = 0;
   l.captionLabel().style().marginLeft = 3;
 }
@@ -144,11 +144,13 @@ void clearMenu() {
 //BANG button \\
 void controlEvent(ControlEvent theEvent) {
   if(theEvent.isController()) {
-    if(theEvent.controller().name()=="bang1") {
+    if(theEvent.controller().name()=="SAVE") {
       save(colorControl.controller("FILE_NAME").getValue()+"jpg");
     }
     if(theEvent.controller().name()=="LOAD_FILE") {
       photo = loadImage(l.getValue()+"jpg");
+      photo.resize(1100, 640);
+      image(photo, 0, 60);
     }
   }
 }
