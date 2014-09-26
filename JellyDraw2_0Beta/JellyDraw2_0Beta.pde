@@ -5,7 +5,9 @@
 
 //For extra windows
 import java.awt.Frame;
-import java.awt.BorderLayout;
+PFrame f;
+secondApplet s;
+
 //For GUI
 import controlP5.*;
 
@@ -34,10 +36,16 @@ void setup() {
   //Set main drawing window size and background
   size(1100, 700);
   background(#FFFFFF);
+  
   //Change Rectangle Mode
   rectMode(CORNERS);
+  
   //Setup Font
   font = loadFont("SansSerif-14.vlw");
+  
+  //Secound window
+  PFrame f = new PFrame();
+  s.background(255,255,255);
   
   /*.Color.*\
   \*Control*/
@@ -131,6 +139,26 @@ void clearMenu() {
   strokeWeight(51);
   stroke(255);
   point(1050, 50);
+}
+
+public class PFrame extends Frame {
+    public PFrame() {
+        setBounds(100,100,400,300);
+        s = new secondApplet();
+        add(s);
+        s.init();
+        show();
+    }
+}
+
+public class secondApplet extends PApplet {
+    public void setup() {
+        size(400, 300);
+        noLoop();
+    }
+
+    public void draw() {
+    }
 }
 
 
