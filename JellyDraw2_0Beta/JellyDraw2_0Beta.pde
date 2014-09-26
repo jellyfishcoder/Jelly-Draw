@@ -145,13 +145,33 @@ void clearMenu() {
 void controlEvent(ControlEvent theEvent) {
   if(theEvent.isController()) {
     if(theEvent.controller().name()=="SAVE") {
+      print(colorControl.controller("FILE_NAME").getValue()+"jpg");
       save(colorControl.controller("FILE_NAME").getValue()+"jpg");
     }
-    if(theEvent.controller().name()=="LOAD_FILE") {
-      photo = loadImage(l.getValue()+"jpg");
+  }
+  if (theEvent.isGroup()) {
+    String byby = ""+theEvent.getGroup();
+    if(byby == ""+"LOAD_FILE") {
+      convertI(""+theEvent.getGroup().getValue());
+    }
+  }
+}
+
+void convertI(String number){
+  if(number == "1"){
+      photo = loadImage("Sea.jpg");
       photo.resize(1100, 640);
       image(photo, 0, 60);
-    }
+  }
+  if(number == "2"){
+      photo = loadImage("Grass.jpg");
+      photo.resize(1100, 640);
+      image(photo, 0, 60);
+  }
+  else{
+      photo = loadImage("Galaxy.jpg");
+      photo.resize(1100, 640);
+      image(photo, 0, 60);
   }
 }
 
