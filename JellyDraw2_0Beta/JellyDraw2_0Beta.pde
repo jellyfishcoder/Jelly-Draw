@@ -1,13 +1,6 @@
 //Jelly-Draw 2.0 Beta
 //By Alexander Pope
 
-
-
-//For extra windows
-import java.awt.Frame;
-PFrame f;
-secondApplet s;
-
 //For GUI
 import controlP5.*;
 
@@ -28,7 +21,7 @@ int GREEN;
 int BLUE;
 int BRUSH;
 int OPACITY;
-int ERASE;
+int ERASER;
 
 /*..Run setup..*\
 \*function once*/
@@ -42,10 +35,6 @@ void setup() {
   
   //Setup Font
   font = loadFont("SansSerif-14.vlw");
-  
-  //Secound window
-  PFrame f = new PFrame();
-  s.background(255,255,255);
   
   /*.Color.*\
   \*Control*/
@@ -83,8 +72,8 @@ void setup() {
   colorControl.controller("BRUSH").setColorLabel(#000000);
   
   //Erase Button
-  colorControl.addToggle("ERASE", false, 300, 30, 10, 10);
-  colorControl.controller("ERASE").setColorLabel(#000000);
+  colorControl.addToggle("ERASER", false, 300, 30, 10, 10);
+  colorControl.controller("ERASER").setColorLabel(#000000);
   
   //Save Text Feild
 }
@@ -95,8 +84,12 @@ void draw() {
   clearMenu();
   
   //Set color and brush variables
-  
-  sc = color(RED, GREEN, BLUE, OPACITY); 
+  if(ERASER == 1){
+    sc = color(255, 255, 255, OPACITY);
+  }
+  else{
+    sc = color(RED, GREEN, BLUE, OPACITY);
+  } 
   sw = BRUSH;
   
   //Draw example of selected brush and paint
@@ -140,25 +133,3 @@ void clearMenu() {
   stroke(255);
   point(1050, 50);
 }
-
-public class PFrame extends Frame {
-    public PFrame() {
-        setBounds(100,100,400,300);
-        s = new secondApplet();
-        add(s);
-        s.init();
-        show();
-    }
-}
-
-public class secondApplet extends PApplet {
-    public void setup() {
-        size(400, 300);
-        noLoop();
-    }
-
-    public void draw() {
-    }
-}
-
-
