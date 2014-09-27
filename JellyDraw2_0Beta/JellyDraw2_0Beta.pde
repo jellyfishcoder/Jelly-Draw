@@ -25,8 +25,6 @@ int OPACITY;
 int ERASER;
 int SAVE;
 
-DropdownList l;
-
 /*..Run setup..*\
 \*function once*/
 void setup() {
@@ -84,16 +82,19 @@ void setup() {
   colorControl.controller("FILE_NAME").setColorLabel(#000000);
   
   //Save Button
-  colorControl.addBang("SAVE", 525, 30, 100, 10);
+  colorControl.addBang("SAVE", 525, 30, 50, 10);
   colorControl.controller("SAVE").setColorLabel(#000000);
   
-  //Dropdown list
-  l = colorControl.addDropdownList("LOAD_FILE", 650, 40, 70, 30);
-  l.addItem("Sea", 1);
-  l.addItem("Grass", 2);
-  l.addItem("Galaxy", 3);
-  l.captionLabel().style().marginTop = 0;
-  l.captionLabel().style().marginLeft = 3;
+  //Load Buttons
+  colorControl.addBang("GRASS", 600, 30, 20, 10);
+  colorControl.controller("GRASS").setColorLabel(#000000);
+  
+  colorControl.addBang("GALAXY", 600, 30, 20, 10);
+  colorControl.controller("GALAXY").setColorLabel(#000000);
+  
+  colorControl.addBang("SEA", 600, 30, 20, 10);
+  colorControl.controller("SEA").setColorLabel(#000000);
+  
 }
 
 /*.Repeat stuff in.*\
@@ -148,31 +149,20 @@ void controlEvent(ControlEvent theEvent) {
       print(colorControl.controller("FILE_NAME").getValue()+"jpg");
       save(colorControl.controller("FILE_NAME").getValue()+"jpg");
     }
-  }
-  if (theEvent.isGroup()) {
-    String byby = ""+theEvent.getGroup();
-    if(byby == ""+"LOAD_FILE") {
-      convertI(""+theEvent.getGroup().getValue());
-    }
-  }
-}
-
-void convertI(String number){
-  if(number == "1"){
+    if(theEvent.controller().name()=="SEA") {
       photo = loadImage("Sea.jpg");
       photo.resize(1100, 640);
       image(photo, 0, 60);
-  }
-  if(number == "2"){
+    }
+    if(theEvent.controller().name()=="GRASS") {
       photo = loadImage("Grass.jpg");
       photo.resize(1100, 640);
       image(photo, 0, 60);
-  }
-  else{
+    }
+    if(theEvent.controller().name()=="GALAXY") {
       photo = loadImage("Galaxy.jpg");
       photo.resize(1100, 640);
       image(photo, 0, 60);
+    }
   }
 }
-
-
