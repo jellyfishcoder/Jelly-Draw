@@ -95,6 +95,9 @@ void setup() {
   colorControl.addBang("SEA", 680, 30, 20, 10);
   colorControl.controller("SEA").setColorLabel(#000000);
   
+  colorControl.addBang("CLEAR", 720, 30, 20, 10);
+  colorControl.controller("CLEAR").setColorLabel(#000000);
+  
 }
 
 /*.Repeat stuff in.*\
@@ -163,6 +166,12 @@ void controlEvent(ControlEvent theEvent) {
       photo = loadImage("Galaxy.jpg");
       photo.resize(1100, 640);
       image(photo, 0, 60);
+    }
+    if(theEvent.controller().name()=="CLEAR") {
+      stroke(0);
+      strokeWeight(1);
+      fill(255);
+      rect(0, 60, 1100, 700);
     }
   }
 }
